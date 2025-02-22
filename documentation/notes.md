@@ -101,7 +101,7 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 
 #### Caso de uso UC03: Descarga de Material de Apoyo
 - **Actores:** Estudiante, Sistema
-- **Propósito:** Permitir al estudiante descargar recursos adicionales (PDFs, audios, videos).
+- **Propósito:** Permitir al estudiante descargar recursos adicionales PDFs.
 - **Resumen:** El estudiante accede a una sección de materiales complementarios y realiza la descarga.
 - **Entradas:** Solicitud de descarga.
 - **Salida:** Archivo descargado localmente.
