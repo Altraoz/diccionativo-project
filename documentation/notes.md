@@ -1,14 +1,6 @@
 # Proyecto: IndiLingo
 
-## 1. Requisitos y Casos de Uso
-
-### Actores:
-- **Estudiantes:** Pueden buscar palabras y repasar vocabulario.
-- **Profesores:** Pueden agregar, editar y eliminar palabras.
-- **Administrador (Opcional):** Puede gestionar usuarios y controlar contenido.
-
-
-## Definición de Requisitos:
+## 1. Definición de Requisitos:
 
 ## 1. Introducción
 Este documento define los requisitos para **diccioNativo**, una plataforma en línea diseñada para el aprendizaje de una lengua indígena mediante un enfoque gramatical. La plataforma ofrece lecciones interactivas y ejercicios para hacer el aprendizaje accesible y ameno. El proceso de desarrollo se rige por el método ICONIX, que permite transformar de forma ágil y estructurada los requisitos en un diseño orientado a objetos.
@@ -76,6 +68,12 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 ---
 
 ### Casos de Uso para Estudiantes:
+
+## Actores:
+- **Estudiantes:** Pueden buscar palabras y repasar vocabulario.
+- **Profesores:** Pueden agregar, editar y eliminar palabras.
+- **Administrador:** Puede gestionar usuarios y controlar contenido.
+
 
 #### Caso de uso UC01: Registro en la Plataforma
 - **Actores:** Estudiante, Sistema
