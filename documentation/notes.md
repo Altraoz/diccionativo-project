@@ -15,7 +15,7 @@
 - **Actores:** Estudiante, Sistema
 - **Propósito:** Permitir que un nuevo usuario cree una cuenta en la plataforma.
 - **Resumen:** El estudiante completa un formulario de registro proporcionando sus datos personales. El sistema verifica la validez de los datos e inicia la creación de la cuenta.
-- **Entradas:** Nombre, correo electrónico, contraseña, país, nivel de conocimiento del idioma.
+- **Entradas:** Nombre, correo electrónico, contraseña.
 - **Salida:** Confirmación de cuenta creada, acceso a la plataforma.
 - **Precondiciones:** El estudiante debe tener una dirección de correo válida.
 - **Postcondiciones:** El estudiante tiene acceso al contenido inicial de la plataforma.
@@ -33,14 +33,14 @@
 
 ---
 
-#### Caso de uso UC01-03: Completar Lección Interactiva
+#### Caso de uso UC01-03: Descarga de Material de Apoyo
 - **Actores:** Estudiante, Sistema
-- **Propósito:** Permitir al estudiante participar en ejercicios prácticos.
-- **Resumen:** El estudiante realiza actividades de escritura, lectura o comprensión.
-- **Entradas:** Respuestas a preguntas o ejercicios interactivos.
-- **Salida:** Retroalimentación inmediata, puntuación obtenida.
-- **Precondiciones:** El estudiante debe estar autenticado.
-- **Postcondiciones:** El progreso se actualiza con los resultados obtenidos.
+- **Propósito:** Permitir al estudiante descargar recursos adicionales (PDFs, audios, videos).
+- **Resumen:** El estudiante accede a una sección de materiales complementarios y realiza la descarga.
+- **Entradas:** Solicitud de descarga.
+- **Salida:** Archivo descargado localmente.
+- **Precondiciones:** Estar registrado y haber completado la lección asociada.
+- **Postcondiciones:** Acceso a recursos complementarios offline.
 
 ---
 
@@ -52,6 +52,8 @@
 - **Salida:** Definición y recursos multimedia asociados.
 - **Precondiciones:** El estudiante debe estar autenticado.
 - **Postcondiciones:** Registro de consultas para análisis de uso del sistema.
+  
+- ---
 
 #### Caso de uso UC01-05: Visualizar Progreso de Aprendizaje
 - **Actores:** Estudiante, Sistema
@@ -85,6 +87,84 @@
 - **Postcondiciones:**  Puntuación añadida al progreso
 
 ---
+
+### Casos de Uso para Administradores:
+
+#### Caso de uso UC02-01: Registrar Nuevo Instructor
+- **Actores:** Administrador, Sistema de Gestión de Usuarios
+- **Propósito:** Permitir la creación de cuentas de instructores.
+- **Resumen:** El administrador ingresa los datos del instructor y asigna roles.
+- **Entradas:** Nombre, correo, permisos.
+- **Salida:** Confirmación de registro exitoso.
+- **Precondiciones:** El administrador debe tener acceso autorizado.
+- **Postcondiciones:** El nuevo instructor recibe sus credenciales por correo.
+
+---
+
+#### Caso de uso UC02-02: Crear Nueva Lección
+- **Actores:** Administrador, Sistema de Gestión de Contenidos
+- **Propósito:** Agregar nuevas lecciones al sistema.
+- **Resumen:** El administrador configura el contenido, añade ejercicios y define objetivos de aprendizaje.
+- **Entradas:** Título, descripción, contenido multimedia.
+- **Salida:** Lección publicada.
+- **Precondiciones:** El administrador debe estar autenticado.
+- **Postcondiciones:** La lección aparece disponible para los estudiantes.
+
+---
+
+#### Caso de uso UC02-03: Editar o Eliminar Contenido
+- **Actores:** Administrador, Sistema de Gestión de Contenidos
+- **Propósito:** Modificar o eliminar contenido de lecciones existentes.
+- **Resumen:** El administrador edita texto, cambia archivos multimedia o elimina lecciones obsoletas.
+- **Entradas:** Modificaciones a realizar.
+- **Salida:** Confirmación de cambios.
+- **Precondiciones:** El administrador debe tener permisos de edición.
+- **Postcondiciones:** Contenido actualizado en la plataforma.
+
+---
+
+#### Caso de uso UC02-04: Ver Registro de Actividades (Log)
+- **Actores:** Administrador, Sistema
+- **Propósito:** Monitorear todas las actividades de los usuarios en el sistema.
+- **Resumen:** El administrador revisa un registro que almacena eventos como inicio de sesión, lecciones completadas, etc
+- **Entradas:**  Filtros de búsqueda por fecha o usuario.
+- **Salida:** Registro de actividades ordenado por fecha.
+- **Precondiciones:** El administrador debe tener permisos avanzados.
+- **Postcondiciones:** Registro actualizado de todas las actividades recientes.
+
+---
+#### UC02-05: Visualizar Lista de Usuarios Registrados
+- **Actores:** Administrador
+- **Propósito:** Permitir al administrador ver una lista de todos los usuarios registrados en la plataforma.
+- **Resumen:** El administrador accede a una lista que muestra información básica de cada usuario, como nombre, correo y rol asignado.
+- **Entradas:** Solicitud de lista de usuarios.
+- **Salida:** Lista con nombres, correos electrónicos y roles.
+- **Precondiciones:** El administrador debe estar autenticado.
+- **Postcondiciones:** Visualización actualizada de usuarios activos en la plataforma.
+
+---
+#### Caso de uso UC02-06: Restablecer Contraseña de Usuario
+- **Actores:** Administrador, Sistema 
+- **Propósito:** Permitir al administrador restablecer contraseñas de usuarios que lo soliciten.
+- **Resumen:** El administrador selecciona un usuario y genera una nueva contraseña temporal.
+- **Entradas:** Selección del usuario afectado.
+- **Salida:** Nueva contraseña temporal generada.
+- **Precondiciones:** El usuario debe haber solicitado la recuperación.
+- **Postcondiciones:** El usuario puede iniciar sesión con la nueva contraseña temporal.
+
+---
+#### Caso de uso UC02-07: Asignar Roles de Usuario
+- **Actores:** Administrador, Sistema.
+- **Propósito:** Definir el rol de cada usuario registrado en la plataforma.
+- **Resumen:** El administrador puede cambiar el rol de un usuario (estudiante, profesor, etc.).
+- **Entradas:**  ID del usuario y rol a asignar.
+- **Salida:** Confirmación de cambio de rol.
+- **Precondiciones:** El usuario debe estar registrado en la plataforma.
+- **Postcondiciones:** El usuario tiene permisos según el nuevo rol asignado.
+
+---
+
+
 
 ## 2. Modelado de Dominio
 
