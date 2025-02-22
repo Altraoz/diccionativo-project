@@ -67,13 +67,13 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 - **Implementación:** Se utilizará Django para desarrollar la plataforma, aplicando una arquitectura en tres capas que separe la lógica de negocio, la presentación y el acceso a datos.
 ---
 
-### Casos de Uso para Estudiantes:
 
 ## Actores:
 - **Estudiantes:** Pueden buscar palabras y repasar vocabulario.
 - **Profesores:** Pueden agregar, editar y eliminar palabras.
 - **Administrador:** Puede gestionar usuarios y controlar contenido.
 
+### Casos de Uso para Estudiantes:
 
 #### Caso de uso UC01: Registro en la Plataforma
 - **Actores:** Estudiante, Sistema
