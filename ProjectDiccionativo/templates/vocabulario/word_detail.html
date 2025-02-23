@@ -1,0 +1,15 @@
+<!-- templates/vocabulario/word_detail.html -->
+{% extends "base.html" %}
+{% block title %}{{ word.term }}{% endblock title %}
+
+{% block content %}
+<h1>{{ word.term }}</h1>
+<p><strong>Idioma:</strong> {{ word.language }}</p>
+<p><strong>Definición:</strong> {{ word.definition }}</p>
+{% if word.example %}
+<p><strong>Ejemplo:</strong> {{ word.example }}</p>
+{% endif %}
+<a href="{% url 'word_update' word.pk %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'word_delete' word.pk %}" class="btn btn-danger">Eliminar</a>
+{% endblock content %}
+

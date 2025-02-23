@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Ejercicios{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Ejercicios</h1>
+  {% if user.is_authenticated and user.role != "estudiante" %}
+    <a href="{% url 'exercise_create' %}" class="btn btn-primary mb-3">+ Nuevo Ejercicio</a>
+  {% endif %}
+  <ul class="list-group">
+    {% for ex in exercises %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <a href="{% url 'exercise_answer' ex.pk %}" class="fw-bold">
+            {{ ex.question|truncatechars:50 }}
+          </a>
+          <span class="badge bg-secondary ms-2">{{ ex.get_exercise_type_display }}</span>
+        </div>
+        {% if user.is_authenticated and user.role != "estudiante" %}
+          <div>
+            <a href="{% url 'exercise_update' ex.pk %}" class="btn btn-sm btn-warning me-1">Editar</a>
+            <a href="{% url 'exercise_delete' ex.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+          </div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No hay ejercicios disponibles.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Detalle del Ejercicio{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Detalle del Ejercicio</h2>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Pregunta</h5>
+      <p class="card-text">{{ object.question }}</p>
+      <p><strong>Tipo:</strong> {{ object.get_exercise_type_display }}</p>
+      <p>
+        <strong>Palabra:</strong> 
+        <a href="{% url 'word_detail' object.word.pk %}">{{ object.word.term }}</a>
+      </p>
+      {% if object.options %}
+        <h5>Opciones</h5>
+        <ul>
+          {% for option in object.options %}
+            <li>{{ option }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <p><strong>Respuesta correcta:</strong> {{ object.correct_answer }}</p>
+      <p><strong>Creado por:</strong> {{ object.user }}</p>
+      <p><strong>Fecha de envío:</strong> {{ object.submitted_at|date:"d/m/Y H:i" }}</p>
+    </div>
+  </div>
+  <a href="{% url 'exercise_list' %}" class="btn btn-secondary mt-3">Volver a la lista</a>
+</div>
+{% endblock content %}

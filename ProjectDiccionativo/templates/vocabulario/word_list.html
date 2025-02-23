@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Diccionario{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Diccionario</h1>
+  {% if user.is_authenticated and user.role == "profesor" %}
+    <a href="{% url 'word_create' %}" class="btn btn-primary mb-3">+ Nueva Palabra</a>
+  {% endif %}
+  <ul class="list-group">
+    {% for word in words %}
+      <li class="list-group-item">
+        <a href="{% url 'word_detail' word.pk %}">{{ word.term }}</a> - {{ word.translation }}
+        {% if user.is_authenticated and user.role == "profesor" %}
+          <div class="float-end">
+            <a href="{% url 'word_update' word.pk %}" class="btn btn-sm btn-warning">Editar</a>
+            <a href="{% url 'word_delete' word.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+          </div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li class="list-group-item">No hay palabras registradas.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

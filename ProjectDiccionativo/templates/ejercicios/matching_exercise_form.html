@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Nuevo Ejercicio de Emparejamiento{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Crear Ejercicio de Emparejamiento</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success mt-2">Guardar Ejercicio</button>
+  </form>
+  <p class="mt-3">
+    Recuerda: Para un ejercicio de emparejamiento debes ingresar al menos 4 opciones y la cantidad de elementos en "Opciones" debe ser igual a la cantidad en "Respuesta correcta".
+  </p>
+</div>
+{% endblock content %}

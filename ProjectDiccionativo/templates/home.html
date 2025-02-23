@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Inicio - DiccioNativo{% endblock title %}
+
+{% block content %}
+<!-- Sección Hero -->
+<section class="py-5 text-center bg-light">
+  <div class="container">
+    <h1 class="display-4">Bienvenido a DiccioNativo</h1>
+    <p class="lead">Una aplicación interactiva para aprender y preservar lenguas indígenas.</p>
+    <hr class="my-4">
+    <p>Explora nuestro diccionario, repasa vocabulario y participa en ejercicios dinámicos diseñados para estudiantes y profesores.</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'word_list' %}" role="button">Explorar Diccionario</a>
+  </div>
+</section>
+
+<!-- Sección de Servicios -->
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <!-- Para Estudiantes -->
+      <div class="col-md-6 mb-4">
+        <h3>Para Estudiantes</h3>
+        <p>Accede a ejercicios interactivos y repasa vocabulario de forma dinámica para fortalecer tu aprendizaje.</p>
+        <a class="btn btn-outline-success" href="{% url 'exercise_list' %}">Ver Ejercicios</a>
+      </div>
+      <!-- Para Profesores -->
+      <div class="col-md-6 mb-4">
+        <h3>Para Profesores</h3>
+        <p>Gestiona y añade nuevas palabras al diccionario para preservar las lenguas indígenas de forma colaborativa.</p>
+        <a class="btn btn-outline-info" href="{% url 'word_create' %}">Agregar Nueva Palabra</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
