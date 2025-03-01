@@ -264,7 +264,7 @@ Utilizar diagramas de robustez para conectar los casos de uso con las clases y d
 Definir la interacción entre los objetos en cada caso de uso, como la adición de una nueva palabra por parte de un profesor.  
 
 ### Diagrama de Secuencia Administrador
-![Diagrama Administrador](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Secuencia/Administrador.png)
+![Diagrama Administrador](//www.plantuml.com/plantuml/png/jPN1QXin48RlVeeXbvn2xmMNE4umWJY56FS-rexD5Araf5tJverwwA7q4VnY7KbhhMNMn2NavhN-_zVCDqYwzGswfgqrN4-gcWtxnc5btVK8LMCT57-Ejg9bnLiq3LmzceRS6b-XeYEPulrVSmNeOVbOwXUoJZK6-Ony4tJXzzAtwDZww5dCbXUPfbOsDrnbs_IiRMuDIoTaat9U2k_GKr3TOzDbtT-DHkCnlD0czkFWkQMTXKSZNsraCXwF2YnmyqMQXS-YsJZo25K8arGDd5qZKOXE6XJXWzdjVv_HYKA4KeRe9hf6HGP1Mp-i5jbDZXKgQtPYEM1ogGaBz8F5R4DuhlRPDhncXR3_5LPZWR9Mj2QoUKlX0seo7hz7MEfudqXhwgWZXV14AYwSvpHHYYG6GKMRYJRTsJAegIWNLhFY1c5jNTrgT1nwcEQa5n88fbY-R3IW1tSiHnEsohEOjUWgB7mP_lG8FcoYiCg5lXDsCaJA3vMWS63XGRFuqFNdu3pi1SLwhUaB1mIAKP-e2ng6FWWhCqaz-rQBaasO00vWkQTTItf7cMXcafjDAyFLpssLk5deQXsQbi9wnIVpcgYcHSsls3NvnjoAa0yv8z_87MuL6nHI8E-umehy-UdbMUp8vUFi3mpcFGAVX6qLTeOrwwWJnUci-fJCOPvFKbxDtc9Is9Vy5egS4rhDlWI2VPgCWoVHuF4hS049VV2qdQUuMWzjvjL39HBcYylrwwfXCZIGrr-g6Kn_8onFgQI0jtZayFIuY6EbIL4wmWuzxV_W1OSu1nLDpyYGm-uYLNrWqMy-4A0SLMGKewQYsTF3y8xtOg0OQAZUMeSw8fXutXYK4s4r-Vzf77x6Q0lEwXv2qT-MNCs-77U-IO8Fo816MAN7Fuxsuq2eqrSvHSglsC8jcQgjzJy0)
 ### Diagrama de Secuencia - Estudiante
 ![Diagrama Estudiante](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Secuencia/Estudiante.png)
 ### Diagrama de Secuencia - Profesor
