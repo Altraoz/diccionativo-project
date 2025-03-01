@@ -1,0 +1,13 @@
+@startuml 'Gestionar Participación de Estudiantes'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Participación" as GP
+entity "Base de Datos" as DB
+
+Profesor -> UI: Consultar interacción de estudiantes
+UI -> GP: Obtener datos de participación
+GP -> DB: Consultar registros
+DB --> GP: Retornar información
+GP -> UI: Mostrar estadísticas de participación
+
+@enduml

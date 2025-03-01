@@ -1,0 +1,13 @@
+@startuml 'Visualizar Lista de Usuarios Registrados'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Usuarios" as SGU
+entity "Base de Datos" as DB
+
+Administrador -> UI : Solicita lista de usuarios
+UI -> SGU : Envía solicitud
+SGU -> DB : Consulta datos de usuarios
+DB --> SGU : Devuelve lista de usuarios
+SGU -> UI : Muestra lista en la interfaz
+UI --> Administrador : Visualiza la lista de usuarios
+@enduml

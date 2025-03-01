@@ -1,0 +1,19 @@
+@startuml 'Editar o Eliminar Contenido'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Contenidos" as SGC
+entity "Base de Datos" as DB
+
+Administrador -> UI : Selecciona una lección para editar o eliminar
+UI -> SGC : Solicita datos de la lección
+SGC -> DB : Consulta información de la lección
+DB --> SGC : Retorna datos
+SGC -> UI : Muestra formulario de edición o confirmación de eliminación
+
+Administrador -> UI : Modifica contenido o confirma eliminación
+UI -> SGC : Envía cambios o solicitud de eliminación
+SGC -> DB : Actualiza o elimina la lección
+DB --> SGC : Confirma operación
+SGC -> UI : Muestra mensaje de éxito
+UI --> Administrador : Confirma cambios en la lección
+@enduml

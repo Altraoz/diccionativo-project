@@ -1,0 +1,13 @@
+@startuml ' Descargar Material de Apoyo'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Contenidos" as GC
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Seleccionar material a descargar
+UI -> GC: Solicitar archivo
+GC -> DB: Obtener material
+DB --> GC: Devolver archivo
+GC -> UI: Iniciar descarga
+
+@enduml

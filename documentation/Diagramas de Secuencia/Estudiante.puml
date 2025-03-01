@@ -1,0 +1,56 @@
+@startuml 'Estudiante'
+actor Estudiante
+participant "Interfaz Web" as UI
+participant "Sistema de Gestión" as SG
+database "Base de Datos" as DB
+
+== Registro en la Plataforma ==
+Estudiante -> UI: Completa formulario de registro
+UI -> SG: Envía datos de registro
+SG -> DB: Guarda información del estudiante
+DB --> SG: Confirma registro
+SG -> UI: Muestra mensaje "Registro exitoso"
+
+== Iniciar Sesión ==
+Estudiante -> UI: Ingresa credenciales
+UI -> SG: Valida credenciales
+SG -> DB: Verifica usuario
+DB --> SG: Retorna validación
+SG -> UI: Concede acceso
+
+== Descargar Material de Apoyo ==
+Estudiante -> UI: Selecciona material a descargar
+UI -> SG: Solicita archivo
+SG -> DB: Obtiene material
+DB --> SG: Devuelve archivo
+SG -> UI: Inicia descarga
+
+== Consultar Glosario de Términos ==
+Estudiante -> UI: Ingresa término de búsqueda
+UI -> SG: Solicita definición del término
+SG -> DB: Consulta término
+DB --> SG: Devuelve definición y multimedia
+SG -> UI: Muestra resultado
+
+== Visualizar Progreso de Aprendizaje ==
+Estudiante -> UI: Solicita ver su progreso
+UI -> SG: Obtiene progreso del usuario
+SG -> DB: Consulta estadísticas
+DB --> SG: Retorna datos de progreso
+SG -> UI: Muestra informe de avance
+
+== Configuración de Perfil ==
+Estudiante -> UI: Modifica datos del perfil
+UI -> SG: Envía datos actualizados
+SG -> DB: Guarda cambios en el perfil
+DB --> SG: Confirma actualización
+SG -> UI: Muestra mensaje "Perfil actualizado"
+
+== Ejercicio de Traducción ==
+Estudiante -> UI: Ingresa traducción de una frase
+UI -> SG: Evalúa la respuesta
+SG -> DB: Consulta respuesta correcta
+DB --> SG: Devuelve respuesta correcta
+SG -> UI: Muestra corrección y puntuación
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml 'Registrar Nuevo Instructor'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Usuarios" as SGU
+entity "Base de Datos" as DB
+
+Administrador -> UI : Ingresa datos del nuevo instructor
+UI -> SGU : Envía datos de registro
+SGU -> DB : Guarda datos del instructor
+DB --> SGU : Confirma registro exitoso
+SGU -> UI : Muestra mensaje de confirmación
+UI --> Administrador : Confirma creación de instructor
+@enduml

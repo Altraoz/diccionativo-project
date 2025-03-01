@@ -1,0 +1,13 @@
+@startuml 'Crear Material de Apoyo'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Contenidos" as GC
+entity "Base de Datos" as DB
+
+Profesor -> UI: Subir nuevo material
+UI -> GC: Procesar archivo
+GC -> DB: Almacenar material
+DB --> GC: Confirmar guardado
+GC -> UI: Mostrar mensaje "Material guardado"
+
+@enduml

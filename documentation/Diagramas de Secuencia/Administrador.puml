@@ -1,0 +1,72 @@
+@startuml 'Administrador'
+actor Administrador
+participant "Interfaz de Administración" as UI
+participant "Sistema de Gestión de Usuarios" as SGU
+participant "Sistema de Gestión de Contenidos" as SGC
+participant "Sistema de Monitoreo" as SM
+participant "Base de Datos" as DB
+
+== Registrar Nuevo Instructor ==
+Administrador -> UI : Ingresa datos del instructor
+UI -> SGU : Envía datos del instructor
+SGU -> DB : Almacena los datos del instructor
+DB --> SGU : Confirmación de registro exitoso
+SGU -> UI : Notifica éxito
+UI --> Administrador : Muestra mensaje de confirmación
+
+== Crear Nueva Lección ==
+Administrador -> UI : Accede a crear nueva lección
+UI -> SGC : Solicita formulario
+SGC -> UI : Retorna formulario
+Administrador -> UI : Ingresa datos de la lección
+UI -> SGC : Envía datos
+SGC -> DB : Guarda la lección
+DB --> SGC : Confirma guardado
+SGC -> UI : Notifica éxito
+UI --> Administrador : Muestra mensaje de éxito
+
+== Editar o Eliminar Contenido ==
+Administrador -> UI : Selecciona lección a editar/eliminar
+UI -> SGC : Solicita datos de la lección
+SGC -> DB : Consulta información
+DB --> SGC : Devuelve datos
+SGC -> UI : Muestra datos
+Administrador -> UI : Modifica o elimina
+UI -> SGC : Envía cambios
+SGC -> DB : Actualiza/elimina lección
+DB --> SGC : Confirma cambios
+SGC -> UI : Notifica éxito
+UI --> Administrador : Muestra mensaje de confirmación
+
+== Ver Registro de Actividades ==
+Administrador -> UI : Solicita ver registros
+UI -> SM : Envía solicitud con filtros
+SM -> DB : Consulta registros
+DB --> SM : Retorna registros
+SM -> UI : Muestra actividades
+UI --> Administrador : Muestra registros de actividad
+
+== Visualizar Lista de Usuarios ==
+Administrador -> UI : Solicita lista de usuarios
+UI -> SGU : Consulta usuarios registrados
+SGU -> DB : Obtiene lista de usuarios
+DB --> SGU : Retorna datos
+SGU -> UI : Muestra lista
+UI --> Administrador : Muestra usuarios
+
+== Restablecer Contraseña ==
+Administrador -> UI : Selecciona usuario
+UI -> SGU : Genera nueva contraseña
+SGU -> DB : Actualiza credenciales
+DB --> SGU : Confirma cambio
+SGU -> UI : Notifica éxito
+UI --> Administrador : Muestra nueva contraseña temporal
+
+== Asignar Roles ==
+Administrador -> UI : Selecciona usuario y nuevo rol
+UI -> SGU : Actualiza permisos
+SGU -> DB : Modifica rol en la base de datos
+DB --> SGU : Confirma cambio
+SGU -> UI : Notifica éxito
+UI --> Administrador : Muestra confirmación de cambio de rol
+@enduml

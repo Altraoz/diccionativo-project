@@ -1,0 +1,70 @@
+@startuml 'Profesor'
+actor Profesor
+participant "Interfaz Web" as UI
+participant "Sistema de Gestión de Contenidos" as SGC
+database "Base de Datos" as DB
+
+== Autenticación ==
+Profesor -> UI: Ingresa a la plataforma
+UI -> SGC: Verifica autenticación
+SGC -> DB: Consulta credenciales
+DB --> SGC: Respuesta de autenticación
+SGC --> UI: Acceso concedido
+
+== Registrar Nueva Lección ==
+Profesor -> UI: Selecciona "Nueva Lección"
+UI -> SGC: Solicita formulario de creación
+SGC -> UI: Muestra formulario
+Profesor -> UI: Completa formulario (Título, contenido, multimedia)
+UI -> SGC: Envía datos de la nueva lección
+SGC -> DB: Guarda la nueva lección
+DB --> SGC: Confirmación de guardado
+SGC -> UI: Muestra mensaje "Lección creada exitosamente"
+
+== Gestionar Lecciones ==
+Profesor -> UI: Selecciona "Gestionar Lecciones"
+UI -> SGC: Solicita listado de lecciones
+SGC -> DB: Obtiene datos de las lecciones
+DB --> SGC: Devuelve datos
+SGC -> UI: Muestra lista de lecciones
+
+== Editar Lección ==
+Profesor -> UI: Selecciona una lección para editar
+UI -> SGC: Solicita detalles de la lección
+SGC -> DB: Consulta información de la lección
+DB --> SGC: Retorna datos de la lección
+SGC -> UI: Muestra formulario de edición
+Profesor -> UI: Modifica contenido y guarda cambios
+UI -> SGC: Envía datos actualizados
+SGC -> DB: Actualiza la lección
+DB --> SGC: Confirma actualización
+SGC -> UI: Muestra mensaje "Lección actualizada correctamente"
+
+== Eliminar Lección ==
+Profesor -> UI: Selecciona una lección para eliminar
+UI -> SGC: Solicita confirmación de eliminación
+SGC -> DB: Elimina la lección
+DB --> SGC: Confirma eliminación
+SGC -> UI: Muestra mensaje "Lección eliminada"
+
+== Asignar Material de Apoyo ==
+Profesor -> UI: Selecciona "Asignar Material de Apoyo"
+UI -> SGC: Solicita lista de materiales disponibles
+SGC -> DB: Consulta materiales de apoyo
+DB --> SGC: Retorna materiales disponibles
+SGC -> UI: Muestra materiales para seleccionar
+Profesor -> UI: Selecciona material y destinatarios
+UI -> SGC: Envía solicitud de asignación
+SGC -> DB: Guarda asignación de material
+DB --> SGC: Confirma asignación
+SGC -> UI: Muestra mensaje "Material asignado correctamente"
+
+== Gestionar Participación de Estudiantes ==
+Profesor -> UI: Selecciona "Ver Participación de Estudiantes"
+UI -> SGC: Solicita datos de participación
+SGC -> DB: Consulta registros de interacción de estudiantes
+DB --> SGC: Retorna estadísticas de participación
+SGC -> UI: Muestra datos de participación
+Profesor -> UI: Analiza y gestiona la información
+
+@enduml

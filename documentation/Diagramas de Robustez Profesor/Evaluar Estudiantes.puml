@@ -1,0 +1,13 @@
+@startuml 'Evaluar Estudiantes'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Evaluación" as GE
+entity "Base de Datos" as DB
+
+Profesor -> UI: Ingresar calificación
+UI -> GE: Enviar evaluación
+GE -> DB: Guardar nota
+DB --> GE: Confirmar registro
+GE -> UI: Mostrar mensaje "Calificación guardada"
+
+@enduml

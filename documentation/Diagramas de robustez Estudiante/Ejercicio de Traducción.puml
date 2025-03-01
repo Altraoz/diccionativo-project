@@ -1,0 +1,13 @@
+@startuml 'Ejercicio de Traducción'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Evaluación" as GE
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Ingresar traducción
+UI -> GE: Evaluar respuesta
+GE -> DB: Consultar respuesta correcta
+DB --> GE: Devolver respuesta correcta
+GE -> UI: Mostrar corrección y puntuación
+
+@enduml

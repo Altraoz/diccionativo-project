@@ -1,0 +1,13 @@
+@startuml 'Ver Registro de Actividades(Log)'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Monitoreo" as SM
+entity "Base de Datos" as DB
+
+Administrador -> UI : Solicita ver registro de actividades
+UI -> SM : Envía solicitud con filtros aplicados
+SM -> DB : Consulta actividades almacenadas
+DB --> SM : Devuelve registros filtrados
+SM -> UI : Muestra actividades en la interfaz
+UI --> Administrador : Visualiza registros de actividad
+@enduml

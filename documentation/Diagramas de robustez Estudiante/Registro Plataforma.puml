@@ -1,0 +1,13 @@
+@startuml 'Registro Plataforma'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Usuarios" as GU
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Completar formulario de registro
+UI -> GU: Enviar datos de registro
+GU -> DB: Guardar información del estudiante
+DB --> GU: Confirmar registro
+GU -> UI: Mostrar mensaje "Registro exitoso"
+
+@enduml

@@ -1,0 +1,13 @@
+@startuml 'Configurar Evaluaciones'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Evaluación" as GE
+entity "Base de Datos" as DB
+
+Profesor -> UI: Crear o modificar evaluación
+UI -> GE: Enviar cambios
+GE -> DB: Guardar configuración
+DB --> GE: Confirmar actualización
+GE -> UI: Mostrar mensaje "Evaluación guardada"
+
+@enduml

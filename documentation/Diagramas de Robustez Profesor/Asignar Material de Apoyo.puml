@@ -1,0 +1,13 @@
+@startuml 'Asignar Material de Apoyo'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Contenidos" as GC
+entity "Base de Datos" as DB
+
+Profesor -> UI: Seleccionar material y destinatarios
+UI -> GC: Asignar material a estudiantes
+GC -> DB: Guardar asignación
+DB --> GC: Confirmar asignación
+GC -> UI: Mostrar mensaje "Material asignado"
+
+@enduml

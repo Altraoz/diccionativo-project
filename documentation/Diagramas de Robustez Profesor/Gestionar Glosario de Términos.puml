@@ -1,0 +1,13 @@
+@startuml 'Gestionar Glosario de Términos'
+actor Profesor
+boundary "Interfaz Web" as UI
+control "Gestor de Glosario" as GG
+entity "Base de Datos" as DB
+
+Profesor -> UI: Agregar o editar término
+UI -> GG: Enviar cambios
+GG -> DB: Guardar actualización
+DB --> GG: Confirmar actualización
+GG -> UI: Mostrar mensaje "Glosario actualizado"
+
+@enduml

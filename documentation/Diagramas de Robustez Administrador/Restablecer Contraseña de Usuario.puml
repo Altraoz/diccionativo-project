@@ -1,0 +1,13 @@
+@startuml
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Usuarios" as SGU
+entity "Base de Datos" as DB
+
+Administrador -> UI : Selecciona usuario para restablecer contraseña
+UI -> SGU : Envía solicitud de restablecimiento
+SGU -> DB : Genera nueva contraseña temporal
+DB --> SGU : Confirma actualización de contraseña
+SGU -> UI : Notifica nueva contraseña
+UI --> Administrador : Muestra confirmación
+@enduml

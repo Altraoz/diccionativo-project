@@ -1,0 +1,16 @@
+@startuml 'Crear Nueva Lección'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Contenidos" as SGC
+entity "Base de Datos" as DB
+
+Administrador -> UI : Accede a la opción de crear nueva lección
+UI -> SGC : Solicita formulario de creación
+SGC -> UI : Muestra formulario
+Administrador -> UI : Ingresa título, contenido y multimedia
+UI -> SGC : Envía datos de la lección
+SGC -> DB : Almacena nueva lección
+DB --> SGC : Confirma guardado
+SGC -> UI : Muestra mensaje de éxito
+UI --> Administrador : Confirma creación de la lección
+@enduml

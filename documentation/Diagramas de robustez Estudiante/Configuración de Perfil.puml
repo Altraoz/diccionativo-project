@@ -1,0 +1,13 @@
+@startuml 'Configuración de Perfil'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Usuarios" as GU
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Modificar datos del perfil
+UI -> GU: Enviar datos actualizados
+GU -> DB: Guardar cambios
+DB --> GU: Confirmar actualización
+GU -> UI: Mostrar mensaje "Perfil actualizado"
+
+@enduml

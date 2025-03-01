@@ -1,0 +1,13 @@
+@startuml 'Visualizar Progreso de Aprendizaje'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Progreso" as GP
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Solicitar progreso
+UI -> GP: Obtener progreso del usuario
+GP -> DB: Consultar estadísticas
+DB --> GP: Retornar datos de progreso
+GP -> UI: Mostrar informe de avance
+
+@enduml

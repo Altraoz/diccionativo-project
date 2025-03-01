@@ -1,0 +1,13 @@
+@startuml 'Consultar Glosario'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Glosario" as GG
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Ingresar término de búsqueda
+UI -> GG: Solicitar definición
+GG -> DB: Consultar término
+DB --> GG: Retornar definición y multimedia
+GG -> UI: Mostrar resultado
+
+@enduml

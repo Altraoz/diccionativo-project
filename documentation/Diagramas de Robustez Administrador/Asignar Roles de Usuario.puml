@@ -1,0 +1,13 @@
+@startuml 'Asignar Roles de Usuario'
+actor Administrador
+boundary "Interfaz de Administración" as UI
+control "Sistema de Gestión de Usuarios" as SGU
+entity "Base de Datos" as DB
+
+Administrador -> UI : Selecciona usuario para asignar rol
+UI -> SGU : Envía solicitud con nuevo rol
+SGU -> DB : Actualiza rol del usuario
+DB --> SGU : Confirma actualización
+SGU -> UI : Muestra mensaje de éxito
+UI --> Administrador : Confirma rol asignado
+@enduml

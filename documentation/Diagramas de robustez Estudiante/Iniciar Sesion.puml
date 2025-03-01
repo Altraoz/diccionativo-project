@@ -1,0 +1,13 @@
+@startuml 'Iniciar Sesion'
+actor Estudiante
+boundary "Interfaz Web" as UI
+control "Gestor de Autenticación" as GA
+entity "Base de Datos" as DB
+
+Estudiante -> UI: Ingresa credenciales
+UI -> GA: Validar credenciales
+GA -> DB: Verificar usuario
+DB --> GA: Retorna validación
+GA -> UI: Conceder acceso
+
+@enduml
