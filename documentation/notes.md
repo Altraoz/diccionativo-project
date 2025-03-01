@@ -262,6 +262,14 @@ Utilizar diagramas de robustez para conectar los casos de uso con las clases y d
 
 ## 4. Diagramas de Secuencia  
 Definir la interacción entre los objetos en cada caso de uso, como la adición de una nueva palabra por parte de un profesor.  
+### Diagrama de Secuencia Administrador
+![Diagrama Administrador](documentation/Diagramas%20de%20Secuencia/Administrador.png)
+
+### Diagrama de Secuencia - Estudiante
+![Diagrama Estudiante](documentation/Diagramas%20de%20Secuencia/Estudiante.png)
+
+### Diagrama de Secuencia - Profesor
+![Diagrama Profesor](documentation/Diagramas%20de%20Secuencia/Profesor.png)
 
 ---
 
