@@ -270,6 +270,9 @@ Definir la interacción entre los objetos en cada caso de uso, como la adición 
 
 ### Diagrama de Secuencia - Profesor
 ![Diagrama Profesor](documentation/Diagramas%20de%20Secuencia/Profesor.png)
+<img src="documentation/Diagramas de Secuencia/Administrador.png" alt="Diagrama Administrador" width="500">
+<img src="documentation/Diagramas de Secuencia/Estudiante.png" alt="Diagrama Estudiante" width="500">
+<img src="documentation/Diagramas de Secuencia/Profesor.png" alt="Diagrama Profesor" width="500">
 
 ---
 
