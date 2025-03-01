@@ -262,17 +262,14 @@ Utilizar diagramas de robustez para conectar los casos de uso con las clases y d
 
 ## 4. Diagramas de Secuencia  
 Definir la interacción entre los objetos en cada caso de uso, como la adición de una nueva palabra por parte de un profesor.  
+
 ### Diagrama de Secuencia Administrador
-![Diagrama Administrador](documentation/Diagramas%20de%20Secuencia/Administrador.png)
-
+![Diagrama Administrador](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Secuencia/Administrador.png)
 ### Diagrama de Secuencia - Estudiante
-![Diagrama Estudiante](documentation/Diagramas%20de%20Secuencia/Estudiante.png)
-
+![Diagrama Estudiante](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Secuencia/Estudiante.png)
 ### Diagrama de Secuencia - Profesor
-![Diagrama Profesor](documentation/Diagramas%20de%20Secuencia/Profesor.png)
-<img src="documentation/Diagramas de Secuencia/Administrador.png" alt="Diagrama Administrador" width="500">
-<img src="documentation/Diagramas de Secuencia/Estudiante.png" alt="Diagrama Estudiante" width="500">
-<img src="documentation/Diagramas de Secuencia/Profesor.png" alt="Diagrama Profesor" width="500">
+![Diagrama Profesor](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Secuencia/Profesor.png)
+
 
 ---
 
