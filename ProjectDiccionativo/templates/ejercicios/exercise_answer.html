@@ -1,17 +1,148 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Responder Ejercicio{% endblock title %}
+
+{% block title %}Ejercicio{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>Ejercicio: {{ exercise.question }}</h2>
-  <p><strong>Palabra:</strong> 
-    <a href="{% url 'word_detail' exercise.word.pk %}">{{ exercise.word.term }}</a>
-  </p>
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary mt-2">Enviar Respuesta</button>
-  </form>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h3 class="fw-bold"><i class="bi bi-lightbulb"></i> Resuelve el Ejercicio</h3>
+        </div>
+        <div class="card-body">
+          <p class="lead text-center">{{ exercise.question }}</p>
+
+          <!-- Palabras asociadas al ejercicio -->
+          <p class="text-muted text-center">
+            <strong><i class="bi bi-journal-text"></i> Palabra{% if exercise.words_m2m.all|length > 1 %}s{% endif %} relacionada{% if exercise.words_m2m.all|length > 1 %}s{% endif %}:</strong>
+            {% if exercise.words_m2m.all %}
+              {% for word in exercise.words_m2m.all %}
+                <a href="{% url 'word_detail' word.pk %}" class="badge bg-info text-white word-detail-link" data-word-id="{{ word.pk }}">
+                  {{ word.term }}
+                </a>{% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            {% else %}
+              <span class="text-danger">No hay palabras asignadas.</span>
+            {% endif %}
+          </p>
+
+          <!-- Formulario de respuesta -->
+          <form method="post" id="exerciseForm" action="{% url 'exercise_answer' exercise.pk %}">
+            {% csrf_token %}
+            <fieldset class="mb-4">
+              <legend class="fw-bold text-success">
+                <i class="bi bi-pencil-fill"></i> Ingresa tu respuesta
+              </legend>
+              {{ form|crispy }}
+            </fieldset>
+
+            <!-- Botón de acción -->
+            <div class="d-flex justify-content-between">
+              <a href="{% url 'exercise_list' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+              </a>
+              <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check-circle"></i> Responder
+              </button>
+            </div>
+          </form>
+
+          <!-- Notificación de respuesta -->
+          <div id="responseAlert" class="alert mt-3 text-center" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock content %}
+
+<!-- Modal para mostrar los detalles de la palabra -->
+<div class="modal fade" id="wordDetailModal" tabindex="-1" aria-labelledby="wordDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="wordDetailModalLabel"><i class="bi bi-book"></i> Detalles de la Palabra</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="wordDetailModalBody">
+        <p class="text-center">Cargando detalles...</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Espera a que cargue el DOM
+document.addEventListener("DOMContentLoaded", function() {
+  const form = document.getElementById("exerciseForm");
+  const responseAlert = document.getElementById("responseAlert");
+
+  // Función para enviar el formulario vía fetch y procesar la respuesta JSON
+  form.addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita envío tradicional
+
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.correct) {
+        responseAlert.classList.remove("alert-danger");
+        responseAlert.classList.add("alert-success");
+        responseAlert.innerHTML = "<strong>¡Bien hecho!</strong> Respuesta correcta. Redirigiendo...";
+        responseAlert.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "{% url 'exercise_list' %}"; // Redirige a la lista de ejercicios
+        }, 2000);
+      } else {
+        responseAlert.classList.remove("alert-success");
+        responseAlert.classList.add("alert-danger");
+        responseAlert.innerHTML = "<strong>¡Incorrecto!</strong> La respuesta correcta es: <b>" + data.correct_answer + "</b>";
+        responseAlert.style.display = "block";
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("Hubo un problema al enviar la respuesta.");
+    });
+  });
+
+  // --- Lógica para el modal de detalles de la palabra ---
+
+  // Selecciona todos los enlaces de palabra
+  const wordLinks = document.querySelectorAll(".word-detail-link");
+  const wordDetailModal = new bootstrap.Modal(document.getElementById("wordDetailModal"));
+  const wordDetailModalBody = document.getElementById("wordDetailModalBody");
+
+  wordLinks.forEach(link => {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+      const url = this.getAttribute("href");
+
+      // Muestra mensaje de carga en el modal
+      wordDetailModalBody.innerHTML = "<p class='text-center'><i class='bi bi-hourglass-split'></i> Cargando detalles...</p>";
+      wordDetailModal.show();
+
+      // Realiza un fetch para obtener el detalle de la palabra
+      fetch(url)
+        .then(response => response.text())
+        .then(html => {
+          // Asigna el HTML recibido al cuerpo del modal
+          wordDetailModalBody.innerHTML = html;
+        })
+        .catch(error => {
+          console.error("Error al cargar detalles de la palabra:", error);
+          wordDetailModalBody.innerHTML = "<p class='text-danger'>No se pudo cargar la información.</p>";
+        });
+    });
+  });
+});
+</script>
+{% endblock %}

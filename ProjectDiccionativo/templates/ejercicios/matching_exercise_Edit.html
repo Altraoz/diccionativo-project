@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Nuevo Ejercicio de Emparejamiento{% endblock title %}
+{% block title %}Editar Ejercicio de Emparejamiento{% endblock title %}
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Crear Ejercicio de Emparejamiento</h2>
+  <h2>Editar Ejercicio de Emparejamiento</h2>
   <form method="post" id="matchingForm">
-    {% csrf_token %}    
-    {# Renderizamos el formulario, pero los campos words_json, correct_answer y exercise_type se muestran como ocultos #}
+    {% csrf_token %}
+    {# Renderiza el formulario; los campos words_json, correct_answer y exercise_type se muestran como ocultos #}
     {{ form|crispy }}
-
-    <input type="hidden" name="exercise_type" id="id_exercise_type" value="emparejamiento">
     
-    <!-- Sección para agregar pares de palabras (usando available_words) -->
+    <!-- Sección para agregar pares de palabras usando available_words -->
     <div class="card mb-3">
       <div class="card-header">Agregar Pares</div>
       <div class="card-body">
@@ -27,7 +25,7 @@
             </select>
           </div>
           <div class="col">
-            <label for="rightWord">Palabra Derecha</label>
+            <label for="rightWord">Palabra Derecha (Traducción)</label>
             <select id="rightWord" class="form-select">
               <option value="">-- Seleccione --</option>
               {% for word in available_words %}
@@ -39,7 +37,7 @@
         <button type="button" id="addPairBtn" class="btn btn-primary">Agregar Par</button>
       </div>
     </div>
-
+    
     <!-- Tabla de pares agregados -->
     <div class="mb-3">
       <h4>Pares Agregados</h4>
@@ -53,10 +51,11 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Se llenará dinámicamente -->
         </tbody>
       </table>
     </div>
-
+    
     <!-- Sección para definir la respuesta correcta -->
     <div class="mb-3" id="correctAnswerSection" style="display:none;">
       <h4>Definir Respuesta Correcta</h4>
@@ -72,25 +71,21 @@
         </tbody>
       </table>
     </div>
-
-    <!-- (Los campos words_json y correct_answer ya se renderizan como HiddenInput desde el form) -->
-
-    <button type="submit" class="btn btn-success">Guardar Ejercicio</button>
+    
+    <!-- Los campos words_json y correct_answer se renderizan como HiddenInput en el form -->
+    <button type="submit" class="btn btn-success">Actualizar Ejercicio</button>
   </form>
 </div>
 {% endblock content %}
 
 {% block extra_js %}
 <script>
-// Al cargar el DOM, se mantiene la lógica para gestionar la agregación de pares y la definición de la respuesta correcta
 document.addEventListener("DOMContentLoaded", function() {
-
-  // Array global para almacenar los pares agregados (cada par: [término, traducción])
+  // Arrays globales para almacenar los pares y las respuestas correctas.
   let pairs = [];
-  // Array para almacenar, para cada par, el índice seleccionado como respuesta correcta
   let correctAnswers = [];
-
-  // Función para actualizar la tabla de pares agregados
+  
+  // Función para actualizar la tabla de pares agregados.
   function updatePairsTable() {
     const tbody = document.querySelector("#pairsTable tbody");
     tbody.innerHTML = "";
@@ -106,15 +101,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     updateCorrectAnswerSection();
   }
-
-  // Función para eliminar un par y su respuesta asociada
+  
+  // Función para eliminar un par.
   window.removePair = function(index) {
     pairs.splice(index, 1);
     correctAnswers.splice(index, 1);
     updatePairsTable();
   }
-
-  // Función para actualizar la sección de definición de respuesta correcta
+  
+  // Función para actualizar la sección de definición de respuesta correcta.
   function updateCorrectAnswerSection() {
     const section = document.getElementById("correctAnswerSection");
     const tbody = document.querySelector("#correctAnswerTable tbody");
@@ -140,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
       `;
       tbody.appendChild(tr);
     });
-    // Listener para actualizar el array correctAnswers al cambiar la selección
+    // Asigna listener a cada select para actualizar el array correctAnswers.
     document.querySelectorAll(".correct-select").forEach(select => {
       select.addEventListener("change", function() {
         const idx = parseInt(this.getAttribute("data-index"));
@@ -149,8 +144,37 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   }
-
-  // Evento para agregar un nuevo par: ahora Palabra Izquierda es el término y Palabra Derecha es la traducción
+  
+  // Función para inicializar los datos en modo edición.
+  function initializeData() {
+    const wordsJsonField = document.getElementById("id_words_json");
+    const correctAnswerField = document.getElementById("id_correct_answer");
+    
+    if (wordsJsonField.value.trim() !== "") {
+      try {
+        pairs = JSON.parse(wordsJsonField.value);
+      } catch (e) {
+        console.error("Error al parsear words_json:", e);
+      }
+    }
+    
+    if (correctAnswerField.value.trim() !== "") {
+      try {
+        // Se asume que correct_answer es un array de pares [leftIndex, rightIndex]
+        let parsedAnswers = JSON.parse(correctAnswerField.value);
+        correctAnswers = parsedAnswers.map(pair => pair[1]);
+      } catch (e) {
+        console.error("Error al parsear correct_answer:", e);
+      }
+    }
+    
+    updatePairsTable();
+  }
+  
+  // Inicializar la interfaz con los datos previamente guardados.
+  initializeData();
+  
+  // Evento para agregar un nuevo par.
   document.getElementById("addPairBtn").addEventListener("click", function() {
     const leftSelect = document.getElementById("leftWord");
     const rightSelect = document.getElementById("rightWord");
@@ -165,12 +189,12 @@ document.addEventListener("DOMContentLoaded", function() {
     rightSelect.value = "";
     updatePairsTable();
   });
-
-  // Al enviar el formulario, se actualizan los campos ocultos con el JSON generado
+  
+  // Al enviar el formulario, se actualizan los campos ocultos con el JSON generado.
   document.getElementById("matchingForm").addEventListener("submit", function(e) {
     if (pairs.length < 4) {
       e.preventDefault();
-      alert("Debe agregar al menos 4 pares de palabras.");
+      alert("Debe haber al menos 4 pares de palabras.");
       return;
     }
     for (let i = 0; i < pairs.length; i++) {
@@ -180,7 +204,6 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
       }
     }
-    // Actualizar los campos ocultos (words_json y correct_answer) que se enviarán en el form
     document.getElementById("id_words_json").value = JSON.stringify(pairs);
     const correctAnswerArray = pairs.map((pair, index) => [index, correctAnswers[index]]);
     document.getElementById("id_correct_answer").value = JSON.stringify(correctAnswerArray);

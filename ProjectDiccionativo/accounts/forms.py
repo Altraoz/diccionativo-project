@@ -1,5 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, CustomUser, Profile
+from django import forms
+
+
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
@@ -16,4 +19,17 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ("username", "email", "age", "role")
+        fields = ("username", "email", "age")
+
+class CustomUserUpdateForm(UserChangeForm):
+    class Meta:
+        model = CustomUser
+        fields = ["first_name", "last_name", "email"]
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["bio", "preferences"]
+        widgets = {
+            "preferences": forms.Textarea(attrs={"rows": 3}),
+        }

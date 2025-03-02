@@ -5,15 +5,20 @@ from .forms import ExerciseForm
 
 @admin.register(Exercise)
 class ExerciseAdmin(admin.ModelAdmin):
-    form = ExerciseForm
-    list_display = ("get_words", "exercise_type", "question", "submitted_at")
+    form = ExerciseForm  # O podrías usar lógica para detectar el tipo y usar el formulario correspondiente
+    list_display = ("get_words_display", "exercise_type", "question", "submitted_at")
     list_filter = ("exercise_type", "submitted_at")
     search_fields = ("question",)
+    raw_id_fields = ['words_m2m']  # Para ejercicios de selección
 
-    # Para que aparezca el botón “+” y el cuadro emergente, usas raw_id_fields o autocomplete_fields:
-    raw_id_fields = ['words']
+    def get_words_display(self, obj):
+        if obj.exercise_type == "emparejamiento":
+            try:
+                pairs = obj.words_json
+                return ", ".join(f"{pair[0]} - {pair[1]}" for pair in pairs)
+            except Exception:
+                return "Error en formato"
+        else:
+            return ", ".join(word.term for word in obj.words_m2m.all())
+    get_words_display.short_description = "Palabras"
 
-    def get_words(self, obj):
-        """Devuelve una cadena con los términos de las palabras separadas por comas."""
-        return ", ".join(word.term for word in obj.words.all())
-    get_words.short_description = "Palabras"

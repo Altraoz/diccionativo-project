@@ -1,14 +1,39 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Nueva Palabra{% endblock title %}
+
+{% block title %}{% if object %}Editar Palabra{% else %}Agregar Nueva Palabra{% endif %}{% endblock title %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2>{% if object %}Editar Palabra{% else %}Agregar Nueva Palabra{% endif %}</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success mt-2">Guardar</button>
-  </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-4">
+                    <h2 class="fw-bold text-center text-primary">
+                        {% if object %}Editar Palabra{% else %}Agregar Nueva Palabra{% endif %}
+                    </h2>
+                    <p class="text-center text-muted">Completa los siguientes campos para registrar una palabra en el diccionario.</p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <button type="submit" class="btn {% if object %}btn-warning{% else %}btn-success{% endif %} w-100 mt-3">
+                            <i class="bi bi-save-fill"></i>
+                            {% if object %}Actualizar{% else %}Guardar{% endif %}
+                        </button>
+                    </form>
+
+                    <hr>
+
+                    <p class="text-center mt-2">
+                        <a href="{% url 'word_list' %}" class="btn btn-outline-secondary w-100">
+                            <i class="bi bi-arrow-left"></i> Volver al Diccionario
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

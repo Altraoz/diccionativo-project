@@ -1,14 +1,212 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Crear/Editar Ejercicio{% endblock title %}
+{% block title %}Crear Ejercicio de Selección{% endblock title %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2 class="mb-3">Crear/Editar Ejercicio</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Guardar</button>
-  </form>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white text-center">
+          <h3 class="fw-bold"><i class="bi bi-ui-checks"></i> Crear Ejercicio de Selección</h3>
+        </div>
+        <div class="card-body">
+          <form method="post" id="seleccionForm">
+            {% csrf_token %}
+            
+            <!-- Aseguramos que el campo exercise_type esté presente -->
+            <input type="hidden" name="exercise_type" id="id_exercise_type" value="seleccion">
+            
+            <!-- Renderizamos el campo question -->
+            <fieldset class="mb-4">
+              <legend class="fw-bold text-success"><i class="bi bi-question-circle"></i> Pregunta</legend>
+              {{ form.question|as_crispy_field }}
+            </fieldset>
+            
+            <!-- Selección de palabra relacionada (en lengua indígena) -->
+            <fieldset class="mb-4">
+              <legend class="fw-bold text-info"><i class="bi bi-book"></i> Palabra Relacionada</legend>
+              <select id="leftWord" class="form-select">
+                <option value="">-- Seleccione una palabra --</option>
+                {% for word in available_words %}
+                  <!-- Usamos word.pk para que se guarde correctamente -->
+                  <option value="{{ word.pk }}">{{ word.translation }}</option>
+                {% endfor %}
+              </select>
+              <input type="hidden" id="id_words_m2m" name="words_m2m">
+            </fieldset>
+            
+            <!-- Opciones del ejercicio -->
+            <div class="card mb-3">
+              <div class="card-header bg-secondary text-white">
+                <i class="bi bi-card-list"></i> Agregar Opciones de Respuesta
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label for="spanishWordSelect" class="fw-bold">Selecciona una opción:</label>
+                  <select id="spanishWordSelect" class="form-select">
+                    <option value="">-- Seleccione --</option>
+                    {% for w in available_words %}
+                      <option value="{{ w.term }}">{{ w.term }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <button type="button" id="addOptionBtn" class="btn btn-primary w-100">
+                  <i class="bi bi-plus-circle"></i> Agregar Opción
+                </button>
+              </div>
+            </div>
+            
+            <!-- Tabla con opciones agregadas -->
+            <div class="mb-3">
+              <h4 class="fw-bold text-secondary"><i class="bi bi-list-ul"></i> Opciones Agregadas</h4>
+              <table class="table table-bordered" id="optionsTable">
+                <thead>
+                  <tr class="table-light">
+                    <th>#</th>
+                    <th>Opción</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Definir respuesta correcta -->
+            <div class="mb-3" id="correctAnswerSection" style="display:none;">
+              <h4 class="fw-bold text-success"><i class="bi bi-check-circle"></i> Respuesta Correcta</h4>
+              <label for="correctAnswerSelect" class="fw-bold">Selecciona la respuesta correcta:</label>
+              <select id="correctAnswerSelect" class="form-select"></select>
+            </div>
+            
+            <!-- Inputs hidden de options y correct_answer (aseguran que se envíen) -->
+            {{ form.options }}
+            {{ form.correct_answer }}
+            
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-between mt-3">
+              <a href="{% url 'exercise_list' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Volver a la lista
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-save"></i> Guardar Ejercicio
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  let optionsList = [];
+  let correctAnswer = null;
+  
+  const optionsTableBody = document.querySelector("#optionsTable tbody");
+  const correctAnswerSection = document.getElementById("correctAnswerSection");
+  const correctAnswerSelect = document.getElementById("correctAnswerSelect");
+  
+  // Campos ocultos para Django
+  const hiddenOptionsField = document.getElementById("id_options");
+  const hiddenCorrectField = document.getElementById("id_correct_answer");
+  const hiddenWordField = document.getElementById("id_words_m2m");
+  const wordSelect = document.getElementById("leftWord");
+  
+  // Al enviar el formulario, copiamos la palabra seleccionada al campo hidden
+  document.getElementById("seleccionForm").addEventListener("submit", function(e) {
+    if (!wordSelect.value) {
+      e.preventDefault();
+      alert("Debe seleccionar una palabra relacionada.");
+      return;
+    }
+    hiddenWordField.value = wordSelect.value;
+    
+    if (optionsList.length < 1) {
+      e.preventDefault();
+      alert("Debe agregar al menos 1 opción en español.");
+      return;
+    }
+    if (!correctAnswer) {
+      e.preventDefault();
+      alert("Debe definir la respuesta correcta.");
+      return;
+    }
+    hiddenCorrectField.value = JSON.stringify([correctAnswer]);
+  });
+  
+  function refreshUI() {
+    optionsTableBody.innerHTML = "";
+    optionsList.forEach((opt, index) => {
+      let tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${opt}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm" data-index="${index}">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      `;
+      optionsTableBody.appendChild(tr);
+    });
+    
+    if (hiddenOptionsField) {
+      hiddenOptionsField.value = JSON.stringify(optionsList);
+    }
+    
+    correctAnswerSection.style.display = optionsList.length > 0 ? "block" : "none";
+    correctAnswerSelect.innerHTML = `<option value="">-- Seleccione la respuesta correcta --</option>`;
+    optionsList.forEach(opt => {
+      let optEl = document.createElement("option");
+      optEl.value = opt;
+      optEl.textContent = opt;
+      correctAnswerSelect.appendChild(optEl);
+    });
+    
+    if (correctAnswer) {
+      correctAnswerSelect.value = correctAnswer;
+    } else {
+      correctAnswerSelect.value = "";
+    }
+  }
+  
+  document.getElementById("addOptionBtn").addEventListener("click", function() {
+    const select = document.getElementById("spanishWordSelect");
+    let val = select.value;
+    if (!val) {
+      alert("Seleccione una palabra en español primero.");
+      return;
+    }
+    if (!optionsList.includes(val)) {
+      optionsList.push(val);
+    }
+    select.value = "";
+    refreshUI();
+  });
+  
+  optionsTableBody.addEventListener("click", function(e) {
+    const btn = e.target.closest("button.btn-danger");
+    if (btn) {
+      let idx = parseInt(btn.getAttribute("data-index"));
+      let deletedValue = optionsList[idx];
+      optionsList.splice(idx, 1);
+      if (correctAnswer && correctAnswer === deletedValue) {
+        correctAnswer = null;
+      }
+      refreshUI();
+    }
+  });
+  
+  correctAnswerSelect.addEventListener("change", function(e) {
+    correctAnswer = e.target.value || null;
+  });
+  
+  refreshUI();
+});
+</script>
+{% endblock extra_js %}

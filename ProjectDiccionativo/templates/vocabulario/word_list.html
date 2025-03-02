@@ -2,25 +2,103 @@
 {% block title %}Diccionario{% endblock title %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1>Diccionario</h1>
-  {% if user.is_authenticated and user.role == "profesor" %}
-    <a href="{% url 'word_create' %}" class="btn btn-primary mb-3">+ Nueva Palabra</a>
-  {% endif %}
-  <ul class="list-group">
-    {% for word in words %}
-      <li class="list-group-item">
-        <a href="{% url 'word_detail' word.pk %}">{{ word.term }}</a> - {{ word.translation }}
-        {% if user.is_authenticated and user.role == "profesor" %}
-          <div class="float-end">
-            <a href="{% url 'word_update' word.pk %}" class="btn btn-sm btn-warning">Editar</a>
-            <a href="{% url 'word_delete' word.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
-          </div>
-        {% endif %}
-      </li>
-    {% empty %}
-      <li class="list-group-item">No hay palabras registradas.</li>
-    {% endfor %}
-  </ul>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="fw-bold">Diccionario de Palabras</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Botones de acciones -->
+                    <div class="d-flex justify-content-between mb-3">
+                        <div>
+                            {% if user.is_authenticated and user.role == "profesor" or user.is_superuser %}
+                                <!-- Botón para cargar CSV -->
+                                <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#uploadModal">
+                                    <i class="bi bi-upload"></i> Cargar CSV
+                                </button>
+                                <!-- Botón para agregar nueva palabra -->
+                                <a href="{% url 'word_create' %}" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle"></i> Nueva Palabra
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <!-- Botón para descargar Excel (Disponible para todos) -->
+                            <a href="{% url 'download_words_excel' %}" class="btn btn-info">
+                                <i class="bi bi-download"></i> Descargar Excel
+                            </a>
+                        </div>
+                    </div>
+
+                    {% if words %}
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Término</th>
+                                        <th scope="col">Traducción</th>
+                                        {% if user.is_authenticated and user.role == "profesor" or user.is_superuser %}
+                                            <th scope="col" class="text-center">Acciones</th>
+                                        {% endif %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for word in words %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'word_detail' word.pk %}" class="fw-bold text-decoration-none text-dark">
+                                                    <i class="bi bi-book-half text-primary"></i> 
+                                                    {{ word.term }}
+                                                </a>
+                                            </td>
+                                            <td>{{ word.translation }}</td>
+                                            {% if user.is_authenticated and user.role == "profesor" or user.is_superuser %}
+                                                <td class="text-center">
+                                                    <a href="{% url 'word_update' word.pk %}" class="btn btn-sm btn-warning me-1">
+                                                        <i class="bi bi-pencil"></i> Editar
+                                                    </a>
+                                                    <a href="{% url 'word_delete' word.pk %}" class="btn btn-sm btn-danger">
+                                                        <i class="bi bi-trash"></i> Eliminar
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info text-center">
+                            <i class="bi bi-info-circle"></i> No hay palabras registradas en este momento.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL PARA CARGAR CSV -->
+<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="uploadModalLabel">Subir Archivo CSV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'upload_words_csv' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="csvFile" class="form-label">Selecciona un archivo CSV</label>
+                        <input type="file" class="form-control" id="csvFile" name="csv_file" required accept=".csv">
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Cargar Palabras</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}

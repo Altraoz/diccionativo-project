@@ -10,8 +10,16 @@
       <p class="card-text">{{ object.question }}</p>
       <p><strong>Tipo:</strong> {{ object.get_exercise_type_display }}</p>
       <p>
-        <strong>Palabra:</strong> 
-        <a href="{% url 'word_detail' object.word.pk %}">{{ object.word.term }}</a>
+        <strong>Palabras:</strong>
+        {% if object.exercise_type == "emparejamiento" %}
+          {% for pair in object.words_json %}
+            {{ pair.0 }} - {{ pair.1 }}{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        {% else %}
+          {% for word in object.words_m2m.all %}
+            <a href="{% url 'word_detail' word.pk %}">{{ word.term }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        {% endif %}
       </p>
       {% if object.options %}
         <h5>Opciones</h5>

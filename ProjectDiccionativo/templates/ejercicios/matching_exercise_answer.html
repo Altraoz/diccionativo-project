@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Responder Ejercicio de Emparejamiento{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="fw-bold">Ejercicio de Emparejamiento</h3>
+                </div>
+                <div class="card-body">
+                    <p class="lead text-center">{{ exercise.question }}</p>
+
+                    <!-- Formulario con campos ocultos -->
+                    <form id="answerForm" method="post" action="{% url 'exercise_answer' exercise.pk %}">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <!-- Interfaz de emparejamiento -->
+                        <div id="matchingInterface" class="mb-4"></div>
+
+                        <!-- Botón de acción -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send"></i> Enviar Respuesta
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Notificación de envío -->
+                    <div id="responseAlert" class="alert alert-success mt-3 text-center" style="display: none;">
+                        <strong><i class="bi bi-check-circle"></i> Respuesta enviada correctamente.</strong> Redirigiendo...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Obtiene los inputs hidden
+    let wordsJsonField = document.getElementById("id_words_json");
+    let correctAnswerField = document.getElementById("id_correct_answer");
+    let pairs = [];
+    let correctAns = [];
+
+    // Depuración antes de parsear JSON
+    console.log("DEBUG: wordsJsonField =", wordsJsonField ? wordsJsonField.value : "No existe id_words_json");
+    console.log("DEBUG: correctAnswerField =", correctAnswerField ? correctAnswerField.value : "No existe id_correct_answer");
+
+    // Parsear el valor de words_json
+    if (wordsJsonField && wordsJsonField.value.trim() !== "") {
+        try {
+            pairs = JSON.parse(wordsJsonField.value);
+            console.log("DEBUG: pairs parseado =", pairs);
+        } catch (e) {
+            console.error("Error parseando words_json:", e);
+        }
+    }
+
+    // Parsear correct_answer
+    if (correctAnswerField && correctAnswerField.value.trim() !== "") {
+        try {
+            correctAns = JSON.parse(correctAnswerField.value);
+            console.log("DEBUG: correctAns parseado =", correctAns);
+        } catch (e) {
+            console.error("Error parseando correct_answer:", e);
+        }
+    }
+
+    // Extraer palabras
+    let leftWords = pairs.map(p => p[0]);
+    let rightWords = pairs.map(p => p[1]);
+    console.log("DEBUG: leftWords =", leftWords);
+    console.log("DEBUG: rightWords =", rightWords);
+
+    // Función para barajar el array
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    let shuffledRightWords = shuffle([...rightWords]);
+    console.log("DEBUG: shuffledRightWords =", shuffledRightWords);
+
+    // Construcción de la interfaz de emparejamiento
+    let container = document.getElementById("matchingInterface");
+    let table = document.createElement("table");
+    table.className = "table table-bordered text-center";
+
+    let thead = document.createElement("thead");
+    thead.innerHTML = `
+        <tr class="table-primary">
+            <th>Palabra Original</th>
+            <th>Selecciona la Traducción</th>
+        </tr>`;
+    table.appendChild(thead);
+
+    let tbody = document.createElement("tbody");
+
+    leftWords.forEach((w, idx) => {
+        let tr = document.createElement("tr");
+
+        let tdLeft = document.createElement("td");
+        tdLeft.textContent = w;
+        tr.appendChild(tdLeft);
+
+        let tdRight = document.createElement("td");
+        let select = document.createElement("select");
+        select.className = "form-select";
+        select.setAttribute("data-index", idx);
+
+        // Opción por defecto
+        let opt = document.createElement("option");
+        opt.value = "";
+        opt.textContent = "-- Seleccione --";
+        select.appendChild(opt);
+
+        // Opciones barajadas
+        shuffledRightWords.forEach((trans, i) => {
+            let option = document.createElement("option");
+            option.value = i;
+            option.textContent = trans;
+            select.appendChild(option);
+        });
+
+        tdRight.appendChild(select);
+        tr.appendChild(tdRight);
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    container.appendChild(table);
+
+    // Manejo del envío de respuesta
+    document.getElementById("submitAnswer").addEventListener("click", function (e) {
+        e.preventDefault();
+        let userAnswer = [];
+
+        try {
+            document.querySelectorAll("#matchingInterface select").forEach(sel => {
+                let leftIdx = parseInt(sel.getAttribute("data-index"));
+                let selectedVal = sel.value;
+
+                if (!selectedVal) {
+                    throw new Error("Debe seleccionar una opción para cada palabra.");
+                }
+
+                let chosenTranslation = shuffledRightWords[selectedVal];
+                let originalIndex = rightWords.indexOf(chosenTranslation);
+                userAnswer.push([leftIdx, originalIndex]);
+            });
+
+            let answerField = document.getElementById("id_answer");
+            if (answerField) {
+                answerField.value = JSON.stringify(userAnswer);
+                console.log("DEBUG: userAnswer =", userAnswer);
+            } else {
+                console.warn("DEBUG: No se encontró el campo hidden id_answer.");
+            }
+
+            document.getElementById("answerForm").submit();
+        } catch (err) {
+            alert(err.message);
+        }
+    });
+});
+</script>
+{% endblock %}

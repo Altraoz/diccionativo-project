@@ -1,0 +1,32 @@
+<!-- templates/ejercicios/exercise_confirm_delete.html -->
+{% extends "base.html" %}
+
+{% block title %}Confirmar eliminación{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>¿Estás seguro de que deseas eliminar este ejercicio?</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Pregunta:</h5>
+            <p>{{ object.question }}</p>
+            <p><strong>Tipo:</strong> {{ object.get_exercise_type_display }}</p>
+            <p><strong>Palabras:</strong> 
+                {% for word_pair in object.words.all %}
+                    {{ word_pair.0 }} - {{ word_pair.1 }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>            
+            <p><strong>Respuesta correcta:</strong>
+                {% for pair in object.correct_answer %}
+                    {{ pair.0 }} - {{ pair.1 }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a href="{% url 'exercise_list' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
