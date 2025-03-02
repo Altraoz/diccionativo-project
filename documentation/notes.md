@@ -21,7 +21,7 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 
 ### 1.1 Gestión de Usuarios
 - **RF01:** El sistema debe permitir el registro de nuevos estudiantes mediante correo electrónico y contraseña.
-- **RF02:** El sistema debe implementar un mecanismo de autenticación para acceso seguro.
+- **RF02:** El sistema debe implementar un mecanismo de usuario y contraseña para acceso seguro.
 - **RF03:** El sistema debe permitir a los usuarios modificar su perfil y preferencias.
 - **RF04:** El sistema debe permitir a los administradores gestionar roles de usuarios.
 - **RF05:** El sistema debe implementar un mecanismo de recuperación de contraseñas.
@@ -30,14 +30,12 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 - **RF06:** El sistema debe organizar el contenido en lecciones secuenciales.
 - **RF07:** El sistema debe permitir la descarga de material complementario PDF.
 - **RF08:** El sistema debe incluir un glosario de términos con definiciones y pronunciación.
-- **RF09:** El sistema debe proporcionar ejercicios de traducción bidireccional (del idioma indígena al español y viceversa).
+- **RF09:** El sistema debe proporcionar ejercicios de traducción del idioma indígena al español.
 - **RF10:** El sistema debe permitir a los administradores crear y editar lecciones interactivas.
 
 ### 1.3 Seguimiento y Evaluación
-- **RF11:** El sistema debe registrar el progreso de aprendizaje de cada estudiante.
-- **RF12:** El sistema debe proporcionar retroalimentación inmediata en los ejercicios.
-- **RF13:** El sistema debe generar estadísticas de uso y aprovechamiento.
-- **RF14:** El sistema debe mantener un registro de actividades para administración.
+- **RF11:** El sistema debe proporcionar retroalimentación inmediata en los ejercicios.
+- **RF12:** El sistema debe mantener un registro de actividades para administración.
 
 ---
 
