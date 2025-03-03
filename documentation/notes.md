@@ -255,7 +255,8 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 
 ## 3. Diseño Robustness  
 Utilizar diagramas de robustez para conectar los casos de uso con las clases y definir interacciones. 
-![Asignar Roles de Usuario]([documentation/Diagramas%20de%20Robustez%20Administrador/Asignar%20Roles%20de%20Usuario.png](https://github.com/Altraoz/diccionativo-project/blob/0613388484bcf9c413914e20a05c3a83954c6872/documentation/Diagramas%20de%20Robustez%20Administrador/Asignar%20Roles%20de%20Usuario.png))
+![Asignar Roles](Diagramas\ de\ Robustez\ Administrador/Asignar\ Roles\ de\ Usuario.png)
+
 
 ### Diagramas de Robustez Administrador.
 
