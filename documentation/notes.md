@@ -285,6 +285,71 @@ Visualizar Lista de Usuarios Registrados
 
 ![Visualizar Lista de Usuarios Registrados](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Visualizar%20Lista%20de%20Usuarios%20Registrados.png)
 
+### Diagramas de Robustez Estudiante.
+
+Configuración de Perfil
+
+![Configuración de Perfil](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Configuraci%C3%B3n%20de%20Perfil.png)
+
+Consultar Glosario de Términos
+
+![Consultar Glosario de Términos](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Consultar%20Glosario%20de%20T%C3%A9rminos.png)
+
+Descargar Material de Apoyo
+
+![Descargar Material de Apoyo](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Descargar%20Material%20de%20Apoyo.png)
+
+Ejercicio de Traducción
+
+![Ejercicio de Traducción](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Ejercicio%20de%20Traducci%C3%B3n.png)
+
+Iniciar Sesión
+
+![Iniciar Sesión](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Iniciar%20Sesion.png)
+
+Registro Plataforma
+
+![Registro Plataforma](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Registro%20Plataforma.png)
+
+Visualizar Progreso de Aprendizaje
+
+![Visualizar Progreso de Aprendizaje](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20robustez%20Estudiante/Visualizar%20Progreso%20de%20Aprendizaje.png)
+
+### Diagramas de Robustez Profesor.
+
+Asignar Material de Apoyo
+
+![Asignar Material de Apoyo](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Asignar%20Material%20de%20Apoyo.png)
+
+Configurar Evaluaciones
+
+![Configurar Evaluaciones](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Configurar%20Evaluaciones.png)
+
+Crear Material de Apoyo
+
+![Crear Material de Apoyo](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Crear%20Material%20de%20Apoyo.png)
+
+Evaluar Estudiantes
+
+![Evaluar Estudiantes](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Evaluar%20Estudiantes.png)
+
+Gestionar Glosario de Términos
+
+![Gestionar Glosario de Términos](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Gestionar%20Glosario%20de%20T%C3%A9rminos.png)
+
+Gestionar Participación de Estudiantes
+
+![Gestionar Participación de Estudiantes](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Gestionar%20Participaci%C3%B3n%20de%20Estudiantes.png)
+
+Iniciar Sesión
+
+![Iniciar Sesión](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Iniciar%20Sesi%C3%B3n.png)
+
+Ver Progreso de los Estudiantes
+
+![Ver Progreso de los Estudiantes](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Profesor/Ver%20Progreso%20de%20los%20Estudiantes.png)
+
+
 ---
 
 ## 4. Diagramas de Secuencia  
