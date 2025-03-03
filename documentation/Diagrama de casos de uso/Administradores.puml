@@ -1,0 +1,20 @@
+@startuml
+actor "Administrador" as Admin
+rectangle DiccioNativo {
+    usecase "UC01: Registrar Nuevo Instructor" as UC01
+    usecase "UC02: Crear Nueva Lección" as UC02
+    usecase "UC03: Editar o Eliminar Contenido" as UC03
+    usecase "UC04: Ver Registro de Actividades (Log)" as UC04
+    usecase "UC05: Visualizar Lista de Usuarios Registrados" as UC05
+    usecase "UC06: Restablecer Contraseña de Usuario" as UC06
+    usecase "UC07: Asignar Roles de Usuario" as UC07
+}
+
+Admin -- UC01
+Admin -- UC02
+Admin -- UC03
+Admin -- UC04
+Admin -- UC05
+Admin -- UC06
+Admin -- UC07
+@enduml
