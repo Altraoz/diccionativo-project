@@ -230,26 +230,7 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 
 ## 2. Modelado de Dominio
 
-### Clases principales:
-- **Palabra**  
-  - `id`: Identificador único  
-  - `nombre`: Nombre de la palabra  
-  - `definicion`: Definición en español  
-  - `pronunciacion`: Guía de pronunciación  
-  - `audio`: Archivo de audio con la pronunciación  
-  - `categoria`: Grupo de palabras relacionadas (colores, animales, etc.)  
-
-- **Usuario**  
-  - `id`: Identificador único  
-  - `nombre`: Nombre del usuario  
-  - `email`: Correo electrónico  
-  - `rol`: Estudiante o profesor  
-
-- **Lección**  
-  - `id`: Identificador único  
-  - `titulo`: Nombre de la lección  
-  - `descripcion`: Breve explicación  
-  - `palabras`: Lista de palabras asociadas  
+![Descripción de la imagen](https://github.com/Altraoz/diccionativo-project/blob/main/documentation/Modelo%20dominio/ModeloDominio.png)
 
 ---
 
