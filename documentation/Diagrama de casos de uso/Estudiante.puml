@@ -1,0 +1,20 @@
+@startuml
+actor "Estudiante" as Est
+rectangle DiccioNativo {
+    usecase "UC01: Registro en la Plataforma" as UC01
+    usecase "UC02: Iniciar Sesión" as UC02
+    usecase "UC03: Descarga de Material de Apoyo" as UC03
+    usecase "UC04: Consultar el Glosario de Términos" as UC04
+    usecase "UC05: Visualizar Progreso de Aprendizaje" as UC05
+    usecase "UC06: Configuración de Perfil" as UC06
+    usecase "UC07: Ejercicio de Traducción" as UC07
+}
+
+Est -- UC01
+Est -- UC02
+Est -- UC03
+Est -- UC04
+Est -- UC05
+Est -- UC06
+Est -- UC07
+@enduml
