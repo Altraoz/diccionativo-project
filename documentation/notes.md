@@ -257,7 +257,21 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 Utilizar diagramas de robustez para conectar los casos de uso con las clases y definir interacciones. 
 
 ### Diagramas de Robustez Administrador.
+Asignar Roles de Usuario
 ![Asignar Roles de Usuario](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Asignar%20Roles%20de%20Usuario.png)
+
+![Crear Nueva Lección](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Crear%20Nueva%20Leccion.png)
+
+![Editar o Eliminar Contenido](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Editar%20o%20Eliminar%20Contenido.png)
+
+![Registrar Nuevo Instructor](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Registrar%20Nuevo%20Instructor.png)
+
+![Restablecer Contraseña de Usuario](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Restablecer%20Contrase%C3%B1a%20de%20Usuario.png)
+
+![Ver Registro de Actividades (Log)](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Ver%20Registro%20de%20Actividades(Log).png)
+
+![Visualizar Lista de Usuarios Registrados](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Visualizar%20Lista%20de%20Usuarios%20Registrados.png)
+
 
 ---
 
