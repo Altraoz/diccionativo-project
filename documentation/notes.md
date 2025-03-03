@@ -74,6 +74,8 @@ El sistema abarcará funcionalidades básicas para tres tipos de usuarios:
 
 ### Casos de Uso para Estudiantes:
 
+![Estudiantes](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagrama%20de%20casos%20de%20uso/Estudiante.png)
+
 #### Caso de uso UC01: Registro en la Plataforma
 - **Actores:** Estudiante, Sistema
 - **Propósito:** Permitir que un nuevo usuario cree una cuenta en la plataforma.
@@ -153,6 +155,8 @@ El sistema abarcará funcionalidades básicas para tres tipos de usuarios:
 
 ### Casos de Uso para Administradores:
 
+![Diagrama de casos de uso](https://github.com/Altraoz/diccionativo-project/raw/main/documentation/Diagrama%20de%20casos%20de%20uso/Admin.png)
+
 #### Caso de uso UC01: Registrar Nuevo Instructor
 - **Actores:** Administrador, Sistema de Gestión de Usuarios
 - **Propósito:** Permitir la creación de cuentas de instructores.
@@ -226,7 +230,9 @@ El sistema abarcará funcionalidades básicas para tres tipos de usuarios:
 - **Postcondiciones:** El usuario tiene permisos según el nuevo rol asignado.
 
 ---
-## Historias de Usuario para el Profesor
+## Caos de uso para el Profesor
+
+![Diagrama de casos de uso](https://github.com/Altraoz/diccionativo-project/raw/main/documentation/Diagrama%20de%20casos%20de%20uso/profesores.png)
 
 ### Caso de uso UC01: Registro en la Plataforma
 - **Actores:** Profesor, Sistema  
