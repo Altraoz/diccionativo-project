@@ -1,4 +1,4 @@
-# Proyecto: IndiLingo
+# Proyecto: diccionativo
 
 ## 1. Definición de Requisitos:
 
