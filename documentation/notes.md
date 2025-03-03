@@ -59,7 +59,7 @@ El sistema abarcará funcionalidades básicas para tres tipos de usuarios:
 
 ## 3. Notas de Integración con el Proceso ICONIX
 
-- **Modelo de Dominio:** Se identificarán entidades clave como `Usuario`, `Lección`, `Ejercicio`, `Progreso` y `Glosario` que representarán la estructura de la plataforma y sus relaciones.
+- **Modelo de Dominio:** Se identificarán entidades clave como `Usuario`, `Lección`, `Ejercicio`,  y `Glosario` que representarán la estructura de la plataforma y sus relaciones.
 - **Casos de Uso:** Cada requisito funcional se traducirá en casos de uso detallados (como los presentados para Estudiantes profesores y Administradores) que servirán de base para el análisis de robustez.
 - **Análisis de Robustez:** Se diseñarán diagramas que vinculen los objetos límite (interfaces), de control (lógica de negocio) y entidad (datos) para cada caso de uso.
 - **Diseño Detallado:** Se desarrollarán diagramas de secuencia y de clases, que asignen comportamientos a las entidades y detallen la interacción entre los componentes.
