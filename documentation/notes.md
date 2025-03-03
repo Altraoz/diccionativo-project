@@ -12,9 +12,10 @@ Este documento define los requisitos para **diccioNativo**, una plataforma en l�
 - **Permitir una gestión sencilla** del contenido y usuarios por parte de los administradores.
 
 ## 3. Alcance
-El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
+El sistema abarcará funcionalidades básicas para tres tipos de usuarios:
 - **Estudiantes:** Registro, autenticación, acceso a lecciones, ejercicios, descargas de material de apoyo, consulta de glosario, seguimiento del progreso y configuración del perfil.
 - **Administradores:** Gestión de usuarios e instructores, creación y edición de lecciones, control del contenido, monitoreo de actividad y administración de roles y contraseñas.
+- **Profesores:**  Gestionar vocabulario (añadir, modificar y eliminar palabras), Crear ejercicios para reforzar el aprendizaje.
 
 
 ## 1. Requisitos Funcionales
@@ -225,8 +226,84 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 - **Postcondiciones:** El usuario tiene permisos según el nuevo rol asignado.
 
 ---
+## Historias de Usuario para el Profesor
 
+### Caso de uso UC01: Registro en la Plataforma
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor cree una cuenta en la plataforma.  
+- **Resumen:** El profesor completa un formulario de registro con sus datos personales. El sistema valida los datos y crea la cuenta.  
+- **Entradas:** Nombre, correo electrónico, contraseña, rol (Profesor).  
+- **Salida:** Cuenta creada, acceso a la plataforma.  
+- **Precondiciones:** El profesor debe tener una dirección de correo válida.  
+- **Postcondiciones:** El profesor puede acceder a la plataforma y gestionar vocabulario y ejercicios.  
 
+---
+
+### Caso de uso UC02: Inicio de Sesión
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor inicie sesión en la plataforma.  
+- **Resumen:** El profesor ingresa sus credenciales en el formulario de inicio de sesión. El sistema verifica la autenticación y permite el acceso.  
+- **Entradas:** Correo electrónico, contraseña.  
+- **Salida:** Acceso exitoso a la plataforma o mensaje de error.  
+- **Precondiciones:** El profesor debe estar registrado.  
+- **Postcondiciones:** El profesor puede acceder a su panel de gestión de palabras y ejercicios.  
+
+---
+
+### Caso de uso UC03: Agregar una Nueva Palabra al Diccionario
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor agregue una nueva palabra al diccionario.  
+- **Resumen:** El profesor accede al módulo de vocabulario, introduce el término, su traducción y un ejemplo de uso. El sistema guarda la palabra en la base de datos.  
+- **Entradas:** Término, traducción, idioma, ejemplo de uso.  
+- **Salida:** Palabra añadida exitosamente al diccionario.  
+- **Precondiciones:** El profesor debe haber iniciado sesión.  
+- **Postcondiciones:** La palabra estará disponible para que los estudiantes la consulten y se pueda usar en ejercicios.  
+
+---
+
+### Caso de uso UC04: Crear un Nuevo Ejercicio
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor cree ejercicios interactivos basados en el vocabulario.  
+- **Resumen:** El profesor selecciona el tipo de ejercicio (selección múltiple o emparejamiento), elige las palabras involucradas y define las respuestas correctas.  
+- **Entradas:** Tipo de ejercicio, pregunta, opciones de respuesta, respuestas correctas.  
+- **Salida:** Ejercicio creado y almacenado en la plataforma.  
+- **Precondiciones:** Debe haber palabras en el diccionario.  
+- **Postcondiciones:** El ejercicio puede ser asignado a los estudiantes para su práctica.  
+
+---
+
+### Caso de uso UC05: Asignar Ejercicios a Estudiantes
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor asigne ejercicios a un grupo de estudiantes.  
+- **Resumen:** El profesor selecciona un ejercicio y elige a qué estudiantes asignarlo. El sistema guarda la asignación y notifica a los estudiantes.  
+- **Entradas:** Lista de estudiantes, ejercicio seleccionado.  
+- **Salida:** Notificación de asignación enviada a los estudiantes.  
+- **Precondiciones:** Deben existir ejercicios creados y estudiantes registrados.  
+- **Postcondiciones:** Los estudiantes podrán visualizar y completar el ejercicio asignado.  
+
+---
+
+### Caso de uso UC06: Cargar Palabras del Idioma desde un Archivo CSV
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor cargue palabras de un idioma en la plataforma mediante un archivo CSV.  
+- **Resumen:** El profesor selecciona un archivo CSV que contiene términos, traducciones y ejemplos de uso. El sistema procesa el archivo y guarda las palabras en la base de datos.  
+- **Entradas:** Archivo CSV con columnas: `término`, `traducción`, `idioma`, `ejemplo de uso`.  
+- **Salida:** Palabras cargadas exitosamente en la plataforma o mensaje de error si hay inconsistencias en el archivo.  
+- **Precondiciones:** El profesor debe haber iniciado sesión y el archivo debe estar correctamente formateado.  
+- **Postcondiciones:** Las palabras estarán disponibles en el diccionario y podrán ser usadas en ejercicios.  
+
+---
+
+### Caso de uso UC07: Editar Perfil del Profesor
+- **Actores:** Profesor, Sistema  
+- **Propósito:** Permitir que un profesor actualice su información personal en la plataforma.  
+- **Resumen:** El profesor accede a su perfil y puede modificar su nombre, biografía y preferencias. El sistema guarda los cambios.  
+- **Entradas:** Nombre, biografía, preferencias de usuario.  
+- **Salida:** Perfil actualizado correctamente.  
+- **Precondiciones:** El profesor debe estar autenticado en la plataforma.  
+- **Postcondiciones:** Los cambios en el perfil se reflejan en su cuenta.  
+
+---
 
 ## 2. Modelado de Dominio
 
