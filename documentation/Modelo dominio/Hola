@@ -1,1 +1,63 @@
 
+@startuml
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <u>x</u>
+
+entity CustomUser {
+    primary_key(id): Integer
+    username: String
+    password: String
+    email: String
+    role: String ["estudiante", "profesor", "administrador"]
+    age: Integer
+}
+
+entity Profile {
+    primary_key(id): Integer
+    foreign_key(user_id): Integer
+    bio: Text
+    preferences: JSON
+    updated_at: DateTime
+}
+
+entity Word {
+    primary_key(id): Integer
+    term: String
+    translation: String
+    language: String
+    example: Text
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+entity Exercise {
+    primary_key(id): Integer
+    exercise_type: String ["seleccion", "emparejamiento"]
+    question: Text
+    options: JSON
+    correct_answer: JSON
+    words_json: JSON
+    submitted_at: DateTime
+    foreign_key(user_id): Integer
+}
+
+entity Word_Exercise {
+    primary_key(id): Integer
+    foreign_key(word_id): Integer
+    foreign_key(exercise_id): Integer
+}
+
+entity AssignedExercises {
+    primary_key(id): Integer
+    foreign_key(exercise_id): Integer
+    foreign_key(student_id): Integer
+}
+
+' Relaciones entre entidades
+CustomUser ||--|{ Profile : has
+CustomUser ||--o{ Exercise : creates
+CustomUser ||--o{ AssignedExercises : is_assigned
+Word ||--o{ Word_Exercise : is_part_of
+Exercise ||--o{ Word_Exercise : contains
+Exercise ||--o{ AssignedExercises : assigned_to
+@enduml
