@@ -254,7 +254,10 @@ El sistema abarcará funcionalidades básicas para dos tipos de usuarios:
 ---
 
 ## 3. Diseño Robustness  
-Utilizar diagramas de robustez para conectar los casos de uso con las clases y definir interacciones.  
+Utilizar diagramas de robustez para conectar los casos de uso con las clases y definir interacciones. 
+![Asignar Roles de Usuario](documentation/Diagramas%20de%20Robustez%20Administrador/Asignar%20Roles%20de%20Usuario.png)
+
+### Diagramas de Robustez Administrador.
 
 ---
 
