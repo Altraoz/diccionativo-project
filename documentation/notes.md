@@ -258,6 +258,7 @@ Utilizar diagramas de robustez para conectar los casos de uso con las clases y d
 
 ### Diagramas de Robustez Administrador.
 Asignar Roles de Usuario
+
 ![Asignar Roles de Usuario](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Asignar%20Roles%20de%20Usuario.png)
 
 ![Crear Nueva Lección](https://raw.githubusercontent.com/Altraoz/diccionativo-project/main/documentation/Diagramas%20de%20Robustez%20Administrador/Crear%20Nueva%20Leccion.png)
