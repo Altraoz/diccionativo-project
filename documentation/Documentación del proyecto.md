@@ -1,5 +1,12 @@
 # Proyecto: diccionativo
 
+---
+## Integrantes
+Jorge Andrés Higuita Monsalve
+Kevin Eduardo Prieto Peña
+Carlos Daniel Urresty Ascunta
+---
+
 ## 1. Definición de Requisitos:
 
 ## 1. Introducción
